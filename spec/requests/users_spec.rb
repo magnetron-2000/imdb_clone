@@ -5,25 +5,25 @@ RSpec.describe "Users", type: :request do
     let(:user) {create(:user)}
     let(:params) {{user: {name:'Mystring', email:"mynewstring@mail.com", password:"mystring", password_confirmation: 'mystring'}}}
     let(:wrong_params) {{user: {name:'', email:"", password:"", password_confirmation: ''}}}
-    context "GET /show" do
+    context "get /show" do
       it "returns http success" do
         get "/users/#{user.id}"
         expect(response).to have_http_status(:success)
       end
     end
 
-    context "GET /new" do
+    context "get /new" do
       it "returns http success" do
         get "/users/new"
         expect(response).to have_http_status(:success)
       end
     end
 
-    context "GET /create" do
+    context "post /create" do
       it "returns http success" do
         post "/users", params: params
         expect(response).to have_http_status(302)
-        expect(response).to redirect_to user_path(User.last)
+        expect(response).to redirect_to user_url(User.last)
       end
 
       it "return http error" do
@@ -32,11 +32,11 @@ RSpec.describe "Users", type: :request do
       end
     end
 
-    context "GET /update" do
+    context "patch /update" do
       it "returns http success" do
         patch "/users/#{user.id}", params: params
         expect(response).to have_http_status(302)
-        expect(response).to redirect_to user_path(user.id)
+        expect(response).to redirect_to user_url(user.id)
       end
 
       it "return http error" do
@@ -45,18 +45,18 @@ RSpec.describe "Users", type: :request do
       end
     end
 
-    context "GET /edit" do
+    context "get /edit" do
       it "returns http success" do
         get "/users/#{user.id}/edit"
         expect(response).to have_http_status(:success)
       end
     end
 
-    context "GET /destroy" do
+    context "delete /destroy" do
       it "returns http success" do
         delete "/users/#{user.id}"
         expect(response).to have_http_status(302)
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to root_url
       end
     end
   end

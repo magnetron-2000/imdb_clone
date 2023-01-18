@@ -10,7 +10,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(set_params)
     if @user.save
-      redirect_to user_path(@user.id)
+      log_in(@user)
+      redirect_to user_url(@user.id)
     else
       render 'users/new'
     end
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(set_params)
-      redirect_to user_path(@user.id)
+      redirect_to user_url(@user.id)
     else
       render 'users/edit'
     end
@@ -29,7 +30,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to root_path
+    redirect_to root_url
   end
 
   private

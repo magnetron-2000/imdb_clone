@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(set_params)
     if @movie.save
-      redirect_to root_path
+      redirect_to root_url
     else
       render 'new'
     end
@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
 
   def update
     if @movie.update(set_params)
-      redirect_to movie_path(@movie[:id])
+      redirect_to movie_url(@movie[:id])
     else
       render 'edit'
     end
@@ -33,7 +33,7 @@ class MoviesController < ApplicationController
 
   def destroy
     @movie.destroy
-    redirect_to root_path
+    redirect_to root_url
   end
 
   private
