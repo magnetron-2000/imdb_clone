@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :find, except: [:new, :create]
+  skip_before_action :authorized, only: [:new, :create]
   def show
   end
 

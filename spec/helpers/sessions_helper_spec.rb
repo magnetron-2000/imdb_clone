@@ -30,5 +30,10 @@ RSpec.describe SessionsHelper, type: :helper do
       log_out
       expect(@current_user).to eq(nil)
     end
+
+    it "authorized" do
+      authorized
+      expect(response).to have_http_status(302)
+    end
   end
 end
